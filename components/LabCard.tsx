@@ -1,7 +1,6 @@
 import Link from "next/link";
 import PlaceholderImage from "./PlaceholderImage";
 import { Lab } from "@/lib/types";
-import { getPriceRange } from "@/lib/parseCsvData";
 import { getLabImage } from "@/lib/images";
 
 interface LabCardProps {
@@ -10,7 +9,33 @@ interface LabCardProps {
 }
 
 export default function LabCard({ lab, featured = false }: LabCardProps) {
-  const priceRange = getPriceRange(lab);
+  // Calculate price range inline (client-safe)
+  const calculatePriceRange = (lab: Lab): string => {
+    const prices = [
+      lab.developOnly35mm,
+      lab.developScan35mm,
+      lab.developHiRes35mm,
+    ].filter(Boolean);
+
+    if (prices.length === 0) return '$$';
+
+    const numericPrices = prices
+      .map(p => {
+        const match = p.match(/\d+/);
+        return match ? parseInt(match[0]) : 0;
+      })
+      .filter(n => n > 0);
+
+    if (numericPrices.length === 0) return '$$';
+
+    const avgPrice = numericPrices.reduce((a, b) => a + b, 0) / numericPrices.length;
+
+    if (avgPrice < 15) return '$';
+    if (avgPrice < 25) return '$$';
+    return '$$$';
+  };
+
+  const priceRange = calculatePriceRange(lab);
   const primaryServices = lab.services.slice(0, 3);
 
   return (
