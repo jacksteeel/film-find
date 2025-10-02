@@ -1,6 +1,12 @@
 import { notFound } from "next/navigation";
 
-export default function LabDetailPage({ params }: { params: { id: string } }) {
+export default async function LabDetailPage({ 
+  params 
+}: { 
+  params: Promise<{ id: string }> 
+}) {
+  const { id } = await params;
+  
   // Phase 1: Stub page - will be implemented in Phase 3
   return (
     <div className="bg-white">
