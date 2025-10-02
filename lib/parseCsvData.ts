@@ -4,7 +4,7 @@ import Papa from 'papaparse';
 import { Lab } from './types';
 
 export async function getLabsData(): Promise<Lab[]> {
-  const csvPath = path.join(process.cwd(), '..', 'au-film-labs-directory.csv');
+  const csvPath = path.join(process.cwd(), 'au-film-labs-directory.csv');
   const fileContent = fs.readFileSync(csvPath, 'utf-8');
   
   const parseResult = Papa.parse(fileContent, {
