@@ -1,4 +1,4 @@
-import LabCard from "@/components/LabCard";
+import LabSearch from "@/components/LabSearch";
 import { getLabsData } from "@/lib/parseCsvData";
 
 export default async function LabsPage() {
@@ -15,7 +15,7 @@ export default async function LabsPage() {
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl">
               Discover {labs.length} premium film labs across Australia. 
-              From C-41 to E-6, black and white to large format—find the perfect lab for your film.
+              Search, filter, and find the perfect lab for your film.
             </p>
           </div>
 
@@ -41,34 +41,9 @@ export default async function LabsPage() {
         </div>
       </section>
 
-      {/* Filter Notice (Phase 1) */}
-      <section className="border-b border-gray-200 bg-white">
-        <div className="container-wide py-4">
-          <p className="text-sm text-gray-500 text-center">
-            Showing all labs • Filtering and sorting coming in Phase 2
-          </p>
-        </div>
-      </section>
-
-      {/* Labs Grid */}
+      {/* Search and Filter */}
       <section className="container-wide section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {labs.map((lab) => (
-            <LabCard key={lab.id} lab={lab} />
-          ))}
-        </div>
-
-        {/* Empty State (shouldn't happen with CSV data) */}
-        {labs.length === 0 && (
-          <div className="text-center py-24">
-            <h3 className="text-2xl font-serif font-semibold mb-4">
-              No labs found
-            </h3>
-            <p className="text-gray-600">
-              Check back soon as we add more labs to our directory.
-            </p>
-          </div>
-        )}
+        <LabSearch labs={labs} />
       </section>
 
       {/* CTA Section */}

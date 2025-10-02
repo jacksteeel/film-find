@@ -2,6 +2,7 @@ import Link from "next/link";
 import PlaceholderImage from "@/components/PlaceholderImage";
 import LabCard from "@/components/LabCard";
 import { getFeaturedLabs } from "@/lib/parseCsvData";
+import { getFeaturedImage } from "@/lib/images";
 
 const quickFilters = [
   "Develop",
@@ -39,7 +40,8 @@ export default async function Home() {
             <div className="order-1 lg:order-2">
               <PlaceholderImage 
                 aspectRatio="photo"
-                label="Film Photography Lab"
+                src={getFeaturedImage()}
+                alt="Film photography darkroom equipment"
                 className="w-full border-2 border-black"
               />
             </div>

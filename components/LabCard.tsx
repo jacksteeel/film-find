@@ -2,6 +2,7 @@ import Link from "next/link";
 import PlaceholderImage from "./PlaceholderImage";
 import { Lab } from "@/lib/types";
 import { getPriceRange } from "@/lib/parseCsvData";
+import { getLabImage } from "@/lib/images";
 
 interface LabCardProps {
   lab: Lab;
@@ -17,7 +18,8 @@ export default function LabCard({ lab, featured = false }: LabCardProps) {
       {/* Lab Image */}
       <PlaceholderImage 
         aspectRatio={featured ? "photo" : "cinema"}
-        label="Lab Photography"
+        src={getLabImage(lab.id)}
+        alt={`${lab.name} - Film lab in ${lab.city}, ${lab.state}`}
         className="w-full"
       />
 
